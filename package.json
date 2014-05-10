@@ -9,6 +9,9 @@
   "scripts": {
     "test": "node test"
   },
+  "bin": {
+    "mimi": "./bin/mimi"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/4simple/mimi"
@@ -18,9 +21,15 @@
     "nodejs",
     "deploy"
   ],
+  "engines": {
+    "node": ">= 0.10.25"
+  },
   "author": "4simple",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/4simple/mimi/issues"
+  },
+  "dependencies": {
+    "commander": "~2.2.0"
   }
 }
