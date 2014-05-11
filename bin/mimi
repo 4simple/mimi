@@ -2,11 +2,15 @@
 
 var program = require("commander");
 var mimi = require('../');
+var logo = require('../lib/logo');
 
 program
   .version("0.0.1")
   .usage("command <appnmae> [options]")
-  .option("-c, --clock <time>", "run command at a specify time");
+  .option("-c, --clock <time>", "run command at a specify time")
+  .option("-f, --force", "run command force")
+  .option("-s, --startfile <filename>", "app start file")
+  ;
 
 /**
  * custom help
@@ -26,8 +30,7 @@ program
   .command("add")
   .description("cd the app root directory and add the app to mimi. Appname use package name as default")
   .action(function(app) {
-    console.log("adding %s to mimi ...", app);
-    mimi.add(app);
+    mimi.add(app, program.startfile);
   });
 
 /**
@@ -37,7 +40,6 @@ program
   .command("rm")
   .description("remove a specify app")
   .action(function(app) {
-    console.log("removing %s from mimi ...", app);
     mimi.remove(app);
   });
 
@@ -68,7 +70,6 @@ program
   .command("deploy")
   .description("deploy a app")
   .action(function(app) {
-    console.log("deploying %s ...", app);
     mimi.deploy(app);
   });
 
@@ -79,7 +80,6 @@ program
   .command("start")
   .description("start a app")
   .action(function(app) {
-    console.log("starting %s ...", app);
   });
 
 /**
@@ -89,7 +89,6 @@ program
   .command("stop")
   .description("stop a app")
   .action(function(app) {
-    console.log("stopping %s ...", app);
   });
 
 /**
@@ -99,7 +98,13 @@ program
   .command("restart")
   .description("restart a app")
   .action(function(app) {
-    console.log("restarting %s ...", app);
+  });
+
+program
+  .command("logo")
+  .description("show mimi log")
+  .action(function() {
+    logo.show();
   });
 
 program.parse(process.argv);
