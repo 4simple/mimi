@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var program = require("commander");
+var mimi = require('../');
 
 program
   .version("0.0.1")
@@ -26,6 +27,38 @@ program
   .description("cd the app root directory and add the app to mimi. Appname use package name as default")
   .action(function(app) {
     console.log("adding %s to mimi ...", app);
+    mimi.add(app);
+  });
+
+/**
+ * remove a app
+ */
+program
+  .command("rm")
+  .description("remove a specify app")
+  .action(function(app) {
+    console.log("removing %s from mimi ...", app);
+    mimi.remove(app);
+  });
+
+/**
+ * list all mimi apps
+ */
+program
+  .command("ls")
+  .description("list all mimi apps")
+  .action(function(app) {
+    mimi.list();
+  });
+
+/**
+ * show a app info
+ */
+program
+  .command("info")
+  .description("show a app info")
+  .action(function(app) {
+    mimi.info(app);
   });
 
 /**
@@ -36,6 +69,7 @@ program
   .description("deploy a app")
   .action(function(app) {
     console.log("deploying %s ...", app);
+    mimi.deploy(app);
   });
 
 /**
